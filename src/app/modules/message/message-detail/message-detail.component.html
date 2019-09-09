@@ -1,0 +1,28 @@
+<div class="card" *ngIf="vm$ | async  as vm">
+	<div class="card-header">
+		{{ vm.pageTitle }}
+	</div>
+
+	<div class="card-body" *ngIf="vm.message">
+
+		<div class="row">
+			<div class="col-md-2">Subject:</div>
+			<div class="col-md-6">{{ vm.message.subject }}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2">To:</div>
+			<div class="col-md-6">
+				<div class="badge badge-pill badge-secondary" *ngFor="let sendTo of vm.message.to">
+					{{ sendTo.name }} - {{ sendTo.email }}
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2">Body:</div>
+			<textarea class="col-md-6">{{ vm.message.body }}</textarea>
+		</div>
+
+	</div>
+</div>

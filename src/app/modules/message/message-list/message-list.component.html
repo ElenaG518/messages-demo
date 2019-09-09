@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+
+  <div class="card-body" *ngIf="vm$ | async as vm">
+
+    <div class="list-group">
+
+      <dl class="list-group-item link" (click)="onNewMessage()">
+        New Message
+      </dl>
+
+      <dl class="list-group-item" *ngFor="let message of vm.messages"
+        [ngClass]="{'active': message?.id === vm.selectedMessageId}" (click)='onSelected(message.id)'>
+        <dt>{{ message.subject }}</dt>
+        <div class="badge badge-pill badge-light" *ngFor="let sendTo of message.to">
+          {{ sendTo.name }}
+          <div class="tooltip">
+            <span class="tooltiptext">{{ sendTo.email }}</span>
+          </div>
+        </div>
+      </dl>
+      
+    </div>
+
+  </div>
+
+</div>
+
+<div class="alert alert-danger" *ngIf="errorMessage$ | async as error">
+  {{error}}
+</div>
